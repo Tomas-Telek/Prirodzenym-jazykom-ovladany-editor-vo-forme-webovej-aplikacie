@@ -2,7 +2,7 @@
 
 Tento repozitár obsahuje zdrojové kódy k bakalárskej práci na tému **Prirodzeným jazykom ovládaný editor vo forme webovej aplikácie**. Cieľom projektu je vytvoriť webový textový editor, ktorý umožňuje úpravu textu prostredníctvom hlasových príkazov v slovenskom alebo anglickom jazyku.
 
-## 🚀 Kľúčové vlastnosti
+## Kľúčové vlastnosti
 - **Hlasové ovládanie:** Prevod reči na text pomocou modelu OpenAI Whisper.
 - **Spracovanie príkazov:** Detekcia kľúčových slov a sémantická analýza hlasových pokynov.
 - **Detekcia aktivity reči (VAD):** Optimalizácia nahrávania pomocou Silero VAD.
@@ -28,7 +28,7 @@ Pre spustenie aplikácie potrebujete mať nainštalovaný [Node.js](https://node
     Aplikácia vyžaduje prístup k OpenAI API. Vo webovom rozhraní aplikácie vložte svoj API kľúč do príslušného poľa. Ak ešte API kľúč nemáte, viete si jeden založiť na stránke https://platform.openai.com/api-keys.
 
 
-📖 Ako aplikáciu používať
+## Ako aplikáciu používať
 
 1. Výber jazyka: V pravom hornom rohu sa nachádza prepínač jazyka. Môžete si vybrať medzi slovenčinou (SJL) a angličtinou (ENG). Aplikácia bude následne očakávať príkazy v zvolenom jazyku.
 
@@ -38,7 +38,7 @@ Pre spustenie aplikácie potrebujete mať nainštalovaný [Node.js](https://node
 
 
 
-## 📖 Funkcionalita a používanie
+## Funkcionalita a používanie
 
 Aplikácia je navrhnutá tak, aby hlasovými príkazmi plne nahradila bežné manuálne úkony v editore. Systém rozlišuje medzi diktovaním a riadením prostredníctvom špecializovaných agentov a funkcií:
 
