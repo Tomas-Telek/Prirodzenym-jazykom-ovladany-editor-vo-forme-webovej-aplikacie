@@ -54,7 +54,7 @@ Aplikácia je navrhnutá tak, aby hlasovými príkazmi plne nahradila bežné ma
 ### Príklady hlasových príkazov:
 - **Diktovanie:** *"Dnes budem pracovať na implementácii agentov."*
 - **Editácia:** *"Preštylizuj poslednú vetu tak, aby znela viac formálne."*
-- **Kreativita:** *"Navrhni tri body, ako by mohol tento text pokračovať."*
+- **Kreativita:** *"Navrhni ako by mohol tento text pokračovať."*
 - **Navigácia:** *"Choď na predchádzajúci odsek."*
 - **Štruktúra:** *"Vlož nový odsek za tento blok textu."*
 - **Nastavenia:** *"Zväčši písmo v editore."*
