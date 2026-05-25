@@ -17,15 +17,9 @@ export default function App() {
 
   const [language, setLanguage] = useState<'sk' | 'en'>('sk');
 
-  // const [paragraphs, setParagraphs] = useState<string[]>([
-  //   "Welcome to the next generation of digital writing. This AI-native text editor is designed to bridge the gap between human thought and digital execution through the power of natural language.",
-  //   "By leveraging an advanced multi-agent architecture, the system acts as a proactive co-author. It can restructure your ideas, refine your tone, and navigate through complex documents without a single mouse click.",
-  //   "Try giving a voice command now, such as 'Make the first paragraph more professional' or 'Generate a creative summary of this text'."
-  // ]);
 
     const [paragraphs, setParagraphs] = useState<string[]>([
-    "Umelá inteligencia dnes transformuje spôsob, akým pristupujeme k tvorbe obsahu. Moderné systémy už nevyžadujú len manuálne zadávanie textu cez klávesnicu, ale dokážu porozumieť komplexným hlasovým pokynom v prirodzenom jazyku.",
-    "Tento editor využíva architektúru autonómnych agentov, ktorí spracovávajú požiadavky používateľa. Vďaka integrácii modelu Whisper a technológie VAD je interakcia plynulá a prirodzená, čo umožňuje efektívnu editáciu bez nutnosti ovládania nahrávania. Integrácia takýchto technológií prináša novú úroveň interakcie medzi človekom a počítačom. Editor už nie je len pasívnym nástrojom na zápis znakov, ale stáva sa inteligentným partnerom, ktorý dokáže plynule rozvíjať autorove myšlienky, navrhovať štylistické vylepšenia a udržiavať konzistentný tón v celom dokumente.",
+    "",
   ]);
 
 
