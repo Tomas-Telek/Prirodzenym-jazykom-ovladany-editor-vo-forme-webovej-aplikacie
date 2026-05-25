@@ -1,0 +1,44 @@
+{
+  "name": "my-nl-editor",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@langchain/openai": "^1.1.1",
+    "@ricky0123/vad-web": "^0.0.30",
+    "html2pdf.js": "^0.14.0",
+    "jspdf": "^4.2.1",
+    "langchain": "^1.0.4",
+    "onnxruntime-web": "^1.24.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-helmet-async": "^3.0.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.0",
+    "baseline-browser-mapping": "^2.10.19",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.3",
+    "vite": "^7.2.2",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.6.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.60.2"
+  }
+}
