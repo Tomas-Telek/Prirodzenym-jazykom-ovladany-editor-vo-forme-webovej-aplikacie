@@ -163,7 +163,6 @@ export default function App() {
           currentIndex={currentIndex} 
           fontSize={fontSize} 
           onManualEdit={handleManualEdit}
-          language={language}
         />
       </main>
     </div>
