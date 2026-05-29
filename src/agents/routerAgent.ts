@@ -4,6 +4,10 @@ import { getLCModel} from "./langchainClient";
 import { z } from "zod";
 import { jsPDF } from "jspdf";
 import { handleUndo, shouldSaveHistory } from "../utils/historyUtils";
+import { 
+  handleStructureAction,
+  calculateNewIndex
+} from "../utils/editorUtils";
 
 export async function runRouterAgent(opts: {
   apiKey: string;
@@ -101,13 +105,12 @@ export async function runRouterAgent(opts: {
   console.log(`Router Agent: ${Math.round(routerEnd - routerStart)}ms`);
 
   for (const task of decision.tasks) {
-    const taskStart = performance.now();
-    let taskEnd;
 
     if (task.category === "undo") {
-      const result = handleUndo(updatedHistory, updatedParagraphs);
+      const result = handleUndo(updatedHistory, updatedParagraphs, updatedIndex);
       updatedParagraphs = result.paragraphs;
       updatedHistory = result.history;
+      updatedIndex = result.index;
       continue;
     }
 
@@ -120,28 +123,15 @@ export async function runRouterAgent(opts: {
     switch (task.category) {
 
       case "structure":
-        const action = task.structureAction;
-
-        
-        if (action === "delete") {
-          updatedParagraphs = updatedParagraphs.filter((_, i) => i !== updatedIndex);
-          updatedIndex = Math.max(0, updatedIndex - 1);
-        } 
-        else if (action === "add_after") {
-          if (updatedParagraphs.length === 0) {
-            updatedParagraphs = [""];
-            updatedIndex = 0;
-          } else {
-            updatedParagraphs.splice(updatedIndex + 1, 0, "");
-            updatedIndex = updatedIndex + 1;
-          }
-        }
-        else if (action === "add_before") {
-          updatedParagraphs.splice(updatedIndex, 0, "");
-        }
-        taskEnd = performance.now();
-        console.log(`Task (${task.category}): ${Math.round(taskEnd - taskStart)}ms`);
-        break;
+        const { paragraphs: newParas, index: newIndex } = handleStructureAction(
+            updatedParagraphs,
+            updatedIndex,
+            task.structureAction as "add_after" | "add_before" | "delete" | "none"
+          );
+          
+          updatedParagraphs = newParas;
+          updatedIndex = newIndex;
+          break;
 
       case "edit":
         const editedText = await runEditAgent({
@@ -151,38 +141,17 @@ export async function runRouterAgent(opts: {
           language: language
         });
         updatedParagraphs[updatedIndex] = editedText;
-        taskEnd = performance.now();
-        console.log(`Task (${task.category}): ${Math.round(taskEnd - taskStart)}ms`);
         break;
 
 
       case "navigate":
-        const target = task.navTarget;
-          if (target === "none") break;
-
-          let newIdx = updatedIndex;
-
-          if (target === "next") {
-            newIdx = Math.min(updatedParagraphs.length - 1, updatedIndex + 1);
-          } else if (target === "prev") {
-            newIdx = Math.max(0, updatedIndex - 1);
-          } else if (target === "first") {
-            newIdx = 0;
-          } else if (target === "last") {
-            newIdx = updatedParagraphs.length - 1;
-          } else {
-            const num = parseInt(target, 10);
-            if (!isNaN(num)) {
-              
-              newIdx = Math.max(0, Math.min(updatedParagraphs.length - 1, num - 1));
-            }
-          }
-          updatedIndex = newIdx;
-
-
-          taskEnd = performance.now();
-          console.log(`Task (${task.category}): ${Math.round(taskEnd - taskStart)}ms`);
-          break;
+        updatedIndex = calculateNewIndex(
+          task.navTarget, 
+          updatedIndex, 
+          updatedParagraphs.length
+        );
+        
+        break;
 
 
       case "font":
@@ -193,15 +162,10 @@ export async function runRouterAgent(opts: {
         } else if (task.fontAction === "reset") {
           updatedFontSize = 16;
         }
-        taskEnd = performance.now();
-        console.log(`Task (${task.category}): ${Math.round(taskEnd - taskStart)}ms`);
         break;
 
       case "dictate":
         updatedParagraphs[updatedIndex] += (updatedParagraphs[updatedIndex] ? " " : "") + task.dictateContent;
-
-        taskEnd = performance.now();
-        console.log(`Task (${task.category}): ${Math.round(taskEnd - taskStart)}ms`);
         break;
 
       case "creative":
@@ -219,8 +183,6 @@ export async function runRouterAgent(opts: {
           updatedParagraphs[updatedIndex] = generatedText;
         }
 
-        taskEnd = performance.now();
-        console.log(`Task (${task.category}): ${Math.round(taskEnd - taskStart)}ms`);
         break;
 
       case "savePDF":
@@ -254,10 +216,6 @@ export async function runRouterAgent(opts: {
         });
     
         doc.save("dokument.pdf");
-
-
-        taskEnd = performance.now();
-        console.log(`Task (${task.category}): ${Math.round(taskEnd - taskStart)}ms`);
         break;
 
       
