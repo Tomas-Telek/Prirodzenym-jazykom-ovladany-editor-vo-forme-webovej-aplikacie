@@ -55,18 +55,18 @@ export default function EditorView({ paragraphs, currentIndex, fontSize, onManua
                 className="paragraph-content"
                 style={{ 
                   flex: 1, 
-                  outline: 'none', // Odstráni modrý rámček pri kliknutí
-                  minHeight: '1em' 
+                  outline: 'none',
+                  minHeight: '1.5em',
+                  color: p ? 'inherit' : '#ccc'
                 }}
                 onBlur={(e) => {
-                  
-                  const newText = e.currentTarget.innerText.trim();
+                  const newText = e.currentTarget.innerText;
                   if (newText !== p) {
                     onManualEdit(i, newText);
                   }
                 }}
               >
-                {p || <span className="empty-placeholder" style={{ color: '#ccc' }}>{language === 'sk' ? 'Prázdny odsek...' : 'Empty paragraph...'}</span>}
+                {p}
               </div>
             </div>
           );
