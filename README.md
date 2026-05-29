@@ -2,6 +2,10 @@
 
 Tento repozitár obsahuje zdrojové kódy k bakalárskej práci na tému **Prirodzeným jazykom ovládaný editor vo forme webovej aplikácie**. Cieľom projektu je vytvoriť webový textový editor, ktorý umožňuje úpravu textu prostredníctvom hlasových príkazov v slovenskom alebo anglickom jazyku.
 
+## Demo aplikácie
+Aplikácia je nasadená a pripravená na okamžité vyskúšanie na adrese:  
+**[https://prirodzenym-jazykom-ovladany-editor.vercel.app/](https://prirodzenym-jazykom-ovladany-editor.vercel.app/)**
+
 ## Kľúčové vlastnosti
 - **Hlasové ovládanie:** Prevod reči na text pomocou modelu OpenAI Whisper.
 - **Spracovanie príkazov:** Detekcia kľúčových slov a sémantická analýza hlasových pokynov.
