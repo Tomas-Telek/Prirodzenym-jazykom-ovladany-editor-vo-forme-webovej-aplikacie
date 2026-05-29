@@ -2,7 +2,6 @@ import { runEditAgent } from "./editAgent";
 import { runCreativeAgent } from "./CreativeAgent";
 import { getLCModel} from "./langchainClient";
 import { z } from "zod";
-import { jsPDF } from "jspdf";
 import { handleUndo, shouldSaveHistory } from "../utils/historyUtils";
 import { exportToPDF } from "../utils/pdfUtils";
 import { 
