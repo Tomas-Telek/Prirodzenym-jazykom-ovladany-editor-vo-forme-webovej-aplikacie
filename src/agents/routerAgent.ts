@@ -3,6 +3,8 @@ import { runCreativeAgent } from "./CreativeAgent";
 import { getLCModel} from "./langchainClient";
 import { z } from "zod";
 import { jsPDF } from "jspdf";
+import { handleUndo, shouldSaveHistory } from "../utils/historyUtils";
+import { exportToPDF } from "../utils/pdfUtils";
 
 export async function runRouterAgent(opts: {
   apiKey: string;
@@ -104,14 +106,13 @@ export async function runRouterAgent(opts: {
     let taskEnd;
 
     if (task.category === "undo") {
-      if (updatedHistory.length > 0) {
-        updatedParagraphs = updatedHistory[updatedHistory.length - 1];
-        updatedHistory = updatedHistory.slice(0, -1);
-      }
-      continue; 
+      const result = handleUndo(updatedHistory, updatedParagraphs);
+      updatedParagraphs = result.paragraphs;
+      updatedHistory = result.history;
+      continue;
     }
 
-    if (task.category !== "navigate" && task.category !== "font" && task.category !== "savePDF") {
+    if (shouldSaveHistory(task.category)) {
       updatedHistory.push([...updatedParagraphs]);
     }
 

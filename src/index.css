@@ -1,9 +1,8 @@
-/*index.css--------------------*/
 /* Hlavný obal aplikácie */
 .app-container {
   margin: 0 auto;
   padding: 40px 20px;
-  background-color: #f9fafb; /* Svetlý podklad pre celú plochu */
+  background-color: #f9fafb;
   min-height: 100vh;
 }
 
@@ -79,7 +78,7 @@
   line-height: 1.6;
 }
 
-/* Štýl pre aktívny odsek (ten, kde je focus) */
+
 .paragraph-block.active {
   border-color: #3b82f6;
   background-color: #eff6ff;
@@ -103,8 +102,6 @@
 }
 
 /*SpeechWhisper.css ------------------------------------ */
-
-/* Kontajner pre hlasové ovládanie */
 .voice-control-wrapper {
   display: flex;
   align-items: center;
@@ -147,7 +144,6 @@
   animation: pulse-red 1.5s infinite;
 }
 
-/* Animácia pulzovania */
 @keyframes pulse-red {
   0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
   70% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
@@ -176,7 +172,6 @@
 
 
 /*CommandInput.css ------------------------------------ */
-/* Kontajner pre textový vstup */
 .command-form {
   background: white;
   padding: 20px;
@@ -234,7 +229,6 @@
 }
 
 /* APIKeyInput.css ------------------------------------ */
-/* Kontajner pre nastavenia API */
 .api-key-container {
   background: #f1f5f9; /* Veľmi jemná sivá pre odlíšenie od editora */
   padding: 16px 20px;
@@ -259,7 +253,7 @@
   padding: 10px 14px;
   border: 1px solid #cbd5e1;
   border-radius: 6px;
-  font-family: 'Courier New', monospace; /* Monospace pre kľúče vyzerá profi */
+  font-family: 'Courier New', monospace;
   font-size: 0.9rem;
   background-color: white;
   transition: all 0.2s;
