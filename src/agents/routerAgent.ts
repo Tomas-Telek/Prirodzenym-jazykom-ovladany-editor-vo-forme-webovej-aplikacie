@@ -4,7 +4,6 @@ import { getLCModel} from "./langchainClient";
 import { z } from "zod";
 import { jsPDF } from "jspdf";
 import { handleUndo, shouldSaveHistory } from "../utils/historyUtils";
-import { exportToPDF } from "../utils/pdfUtils";
 
 export async function runRouterAgent(opts: {
   apiKey: string;
