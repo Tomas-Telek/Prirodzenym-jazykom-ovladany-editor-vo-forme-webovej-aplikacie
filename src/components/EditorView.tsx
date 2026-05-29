@@ -6,10 +6,9 @@ type Props = {
   currentIndex: number;
   fontSize?: number;
   onManualEdit: (index: number, newText: string) => void;
-  language: string;
 };
 
-export default function EditorView({ paragraphs, currentIndex, fontSize, onManualEdit, language }: Props) {
+export default function EditorView({ paragraphs, currentIndex, fontSize, onManualEdit}: Props) {
   const activeParagraphRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
