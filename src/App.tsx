@@ -48,7 +48,7 @@ export default function App() {
         currentIndex: stateRef.current.currentIndex,
         history_: stateRef.current.history_,
         fontSize: stateRef.current.fontSize,
-        language: stateRef.current.language // Odtiaľto sa berie VŽDY aktuálny jazyk pre AI
+        language: stateRef.current.language 
       });
       
       setParagraphs(results.paragraphs);

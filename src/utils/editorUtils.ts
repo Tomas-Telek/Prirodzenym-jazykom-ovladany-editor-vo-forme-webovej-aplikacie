@@ -53,3 +53,21 @@ export function calculateNewIndex(
 
   return newIdx;
 }
+
+
+export function calculateNewFontSize(
+  action: "increase" | "decrease" | "reset" | "none",
+  currentSize: number,
+  value: number = 2
+): number {
+  switch (action) {
+    case "increase":
+      return currentSize + value;
+    case "decrease":
+      return Math.max(8, currentSize - value);
+    case "reset":
+      return 16;
+    default:
+      return currentSize;
+  }
+}

@@ -4,9 +4,11 @@ import { getLCModel} from "./langchainClient";
 import { z } from "zod";
 import { jsPDF } from "jspdf";
 import { handleUndo, shouldSaveHistory } from "../utils/historyUtils";
+import { exportToPDF } from "../utils/pdfUtils";
 import { 
   handleStructureAction,
-  calculateNewIndex
+  calculateNewIndex,
+  calculateNewFontSize
 } from "../utils/editorUtils";
 
 export async function runRouterAgent(opts: {
@@ -155,13 +157,11 @@ export async function runRouterAgent(opts: {
 
 
       case "font":
-        if (task.fontAction === "increase") {
-          updatedFontSize += task.fontValue;
-        } else if (task.fontAction === "decrease") {
-          updatedFontSize = Math.max(8, updatedFontSize - task.fontValue);
-        } else if (task.fontAction === "reset") {
-          updatedFontSize = 16;
-        }
+        updatedFontSize = calculateNewFontSize(
+          task.fontAction as "increase" | "decrease" | "reset" | "none",
+          updatedFontSize,
+          task.fontValue
+        );
         break;
 
       case "dictate":
@@ -186,36 +186,7 @@ export async function runRouterAgent(opts: {
         break;
 
       case "savePDF":
-        const doc = new jsPDF();
-        const removeDiacritics = (text: string) => {
-          return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        };
-        
-        doc.setFont("helvetica", "normal");
-        doc.setFontSize(12);
-        
-        let yPosition = 35;
-        const pageHeight = doc.internal.pageSize.height;
-        const margin = 20;
-        const contentWidth = 170;
-        const lineHeight = 7;
-    
-        paragraphs.forEach((para) => {
-          const cleanText = removeDiacritics(para); 
-          const lines: string[] = doc.splitTextToSize(cleanText, contentWidth);
-          
-          lines.forEach(line => {
-            if (yPosition > pageHeight - 20) {
-              doc.addPage();
-              yPosition = 20;
-            }
-            doc.text(line, margin, yPosition);
-            yPosition += lineHeight;
-          });
-          yPosition += 5;
-        });
-    
-        doc.save("dokument.pdf");
+        exportToPDF(updatedParagraphs);
         break;
 
       
