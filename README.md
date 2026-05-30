@@ -65,6 +65,7 @@ Aplikácia je navrhnutá tak, aby hlasovými príkazmi plne nahradila bežné ma
 - **História:** *"Vráť poslednú zmenu."*
 
 
+
 Autor: Tomáš Telek
 
 Vedúci práce: RNDr. Andrej Lúčny, PhD.

@@ -192,7 +192,6 @@ export async function runRouterAgent(opts: {
     }
   }
 
-
   return {
     paragraphs: updatedParagraphs,
     currentIndex: updatedIndex,
